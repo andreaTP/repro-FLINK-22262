@@ -23,13 +23,17 @@ a running K8s cluster
  - create needed secrets: `kubectl apply -f hello-world.yaml`
  - deploy with `deploy.sh`
  - wait for the job to be running
+
+ if you do:
  - cancel the job: `flink cancel --target kubernetes-application -Dkubernetes.cluster-id=hello-world -Dkubernetes.namespace=hello-world 00000000000000000000000000000000`
+ - NOTE: the JobManager enter in `CrashLoopBackoff`
  - delete the deployment: `kubectl delete deployment hello-world --namespace hello-world`
  - deploy with `deploy.sh`
  - job manager throws: `java.util.concurrent.ExecutionException: org.apache.flink.runtime.messages.FlinkJobNotFoundException: Could not find Flink job`
+ - cannot recover
 
-Full exception text:
 
+Full exceptions text:
 ```
 2021-04-14 16:42:54,398 ERROR cloudflow.runner.Runner$                                     [] - A fatal error has occurred. The streamlet is going to shutdown
 java.util.concurrent.ExecutionException: org.apache.flink.runtime.messages.FlinkJobNotFoundException: Could not find Flink job (00000000000000000000000000000000)

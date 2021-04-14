@@ -26,12 +26,21 @@ class HelloWorldShape extends FlinkStreamlet {
 
   def createLogic() = new FlinkStreamletLogic {
     override def buildExecutionGraph: Unit = {
-      println("hello world")
+      println("hello world 2")
 
       context
         .env
-        .addSource(new DataGeneratorSource(SequenceGenerator.stringGenerator(0, 1000)))
-        .map{x => Thread.sleep(1000); s"number: $x" }
+        .fromCollection(new Iterator[Int] with Serializable {
+          @transient var last: Int = 0
+
+          def hasNext(): Boolean = true
+          def next(): Int = {
+            Thread.sleep(1000)
+            last = last + 1
+            last
+          }
+        })
+        .map{x => s"number: $x" }
         .addSink(x => println(x))
     }
   }

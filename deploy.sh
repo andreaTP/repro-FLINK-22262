@@ -8,6 +8,6 @@ flink run-application \
     -Dkubernetes.namespace=hello-world \
     -Dparallelism.default=2 \
     -Dhigh-availability=org.apache.flink.kubernetes.highavailability.KubernetesHaServicesFactory \
-    -Dhigh-availability.storageDir=/mnt/flink/storage/asha \
+    -Dhigh-availability.storageDir=/mnt/flink/storage/zzzsha \
     -Dkubernetes.pod-template-file=pod-template.yaml \
     local:///opt/flink/usrlib/cloudflow-runner.jar

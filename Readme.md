@@ -33,7 +33,7 @@ a running K8s cluster
  - cannot recover
 
 
-Full exceptions text:
+Full exception text:
 ```
 2021-04-14 16:42:54,398 ERROR cloudflow.runner.Runner$                                     [] - A fatal error has occurred. The streamlet is going to shutdown
 java.util.concurrent.ExecutionException: org.apache.flink.runtime.messages.FlinkJobNotFoundException: Could not find Flink job (00000000000000000000000000000000)

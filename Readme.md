@@ -32,6 +32,8 @@ a running K8s cluster
  - job manager throws: `java.util.concurrent.ExecutionException: org.apache.flink.runtime.messages.FlinkJobNotFoundException: Could not find Flink job`
  - cannot recover
 
+doing a straight `kubectl delete deployment hello-world --namespace hello-world` enable to redeploy the very same binary.
+
 
 Full exception text:
 ```

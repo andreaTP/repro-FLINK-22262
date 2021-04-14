@@ -1,5 +1,5 @@
 
-Dependencies:
+## Dependencies:
 
  - docker
  - sbt
@@ -9,13 +9,15 @@ Dependencies:
  - helm
  - flink cli
 
-Steps:
+a running K8s cluster
+
+## Steps:
 
  - Clone this project
  - change the values in `docker.sbt` to target a Docker registry/repo you and the cluster have access to
  - run `sbt buildApp`
  - create "hello-world" namespace: `kubectl create ns hello-world`
- - run ./setup-example-rbac.sh
+ - run `./setup-example-rbac.sh`
  - create an NFS provisioner: `helm upgrade -i nfs-server-provisioner stable/nfs-server-provisioner --set storageClass.provisionerName=cloudflow-nfs --namespace hello-world`
  - create a PVC for Flink: `kubectl apply -f flink-pvc.yaml -n hello-world`
  - create needed secrets: `kubectl apply -f hello-world.yaml`

@@ -15,6 +15,7 @@ a running K8s cluster
 
  - Clone this project
  - change the values in `docker.sbt` to target a Docker registry/repo you and the cluster have access to
+(instead of the following steps you can simply run `./first-deploy.sh`)
  - run `sbt buildApp`
  - create "hello-world" namespace: `kubectl create ns hello-world`
  - run `./setup-example-rbac.sh`
@@ -25,12 +26,14 @@ a running K8s cluster
  - wait for the job to be running
 
  if you do:
- - cancel the job: `flink cancel --target kubernetes-application -Dkubernetes.cluster-id=hello-world -Dkubernetes.namespace=hello-world 00000000000000000000000000000000`
+ - cancel the job: `flink cancel --target kubernetes-application --withSavepoint -Dkubernetes.cluster-id=hello-world -Dkubernetes.namespace=hello-world 00000000000000000000000000000000`
  - NOTE: the JobManager enter in `CrashLoopBackoff`
  - delete the deployment: `kubectl delete deployment hello-world --namespace hello-world`
  - deploy with `deploy.sh`
  - job manager throws: `java.util.concurrent.ExecutionException: org.apache.flink.runtime.messages.FlinkJobNotFoundException: Could not find Flink job`
  - cannot recover
+
+the only way to recover is to delete the deployment, delete the `hello-world-00000000000000000000000000000000-jobmanager-leader` ConfigMap and re-deploy.
 
 doing a straight `kubectl delete deployment hello-world --namespace hello-world` enable to redeploy the very same binary.
 

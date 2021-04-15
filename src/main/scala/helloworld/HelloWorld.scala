@@ -26,8 +26,6 @@ class HelloWorldShape extends FlinkStreamlet {
 
   def createLogic() = new FlinkStreamletLogic {
     override def buildExecutionGraph: Unit = {
-      println("hello world 2")
-
       context
         .env
         .fromCollection(new Iterator[Int] with Serializable {

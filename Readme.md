@@ -15,7 +15,9 @@ a running K8s cluster
 
  - Clone this project
  - change the values in `docker.sbt` to target a Docker registry/repo you and the cluster have access to
+
 (instead of the following steps you can simply run `./first-deploy.sh`)
+
  - run `sbt buildApp`
  - create "hello-world" namespace: `kubectl create ns hello-world`
  - run `./setup-example-rbac.sh`
